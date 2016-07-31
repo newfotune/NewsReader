@@ -7,28 +7,19 @@ import java.net.URL;
  * @version 1.0
  */
 public class Subsection {
-	private NewsWebsite website;
 	private URL url;
 	private String topic;
 	
 	/**
 	 * Initialized the field variables.
-	 * @param website the parent website of this subsection.
 	 * @param url the url of this subsection.
 	 * @param topic the topic of this subsection.
 	 */
-	public Subsection(final NewsWebsite website, final URL url, final String topic) {
-		this.website = website;
+	public Subsection(final URL url, final String topic) {
 		this.url = url;
 		this.topic = topic;
 	}
-	/**
-	 * Getter for the website of this subsection.
-	 * @return the parent website of this subsection.
-	 */
-	public NewsWebsite getWebsite() {
-		return website;
-	}
+	
 	/**
 	 * Gets the url of this subsection.
 	 * @return the url of this subsection.
@@ -46,6 +37,6 @@ public class Subsection {
 	
 	@Override
 	public String toString() {
-		return website.toString() +"/"+topic;
+		return topic;
 	}
 }

@@ -3,9 +3,12 @@ package com.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JPanel;
+
 import com.model.connections.DBManager;
+import com.model.connections.DOMParser;
+import com.model.objects.Article;
 import com.model.objects.NewsWebsite;
-import com.model.objects.Subsection;
 
 public class NewsReader {
 	private List<NewsWebsite> websites;
@@ -15,18 +18,10 @@ public class NewsReader {
 		websites = getWebsitesFromDB();
 		sitesPulled = true;
 		loadSubsectionsFromDB(websites);
-		
-		for (int i = 0; i< websites.size(); i++) {
-			NewsWebsite site = websites.get(i);
-			System.out.print(site+"  ");
-			for (int j =0; j < site.subsections().size(); j++) {
-				System.out.println(site.subsections().get(j));
-			}
-		}
 	}
 	
 	public List<NewsWebsite> getWebsites() {
-		if (!sitesPulled){
+		while (!sitesPulled){
 			try {
 				this.wait();
 			} catch (InterruptedException e) {
@@ -35,11 +30,6 @@ public class NewsReader {
 		}
 		return websites;
 	}
-	
-	public static synchronized void pullArticle() {
-		
-	}
-	
 	/**
 	 * Method called from the GUI to get all websites from database to be displayed on GUI.
 	 * @return a list of all news websites on database.

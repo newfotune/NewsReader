@@ -37,7 +37,7 @@ public class DBManager {
 			
 			rs = pStatement.executeQuery();
 			while (rs.next()) {
-				Subsection sec = new Subsection(website, rs.getURL("URL"), rs.getString("topic"));
+				Subsection sec = new Subsection(rs.getURL("URL"), rs.getString("topic"));
 				website.addSubsection(sec);
 			}
 			conn.close();
