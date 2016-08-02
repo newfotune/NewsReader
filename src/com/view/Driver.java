@@ -12,18 +12,18 @@ public class Driver {
 	            UIManager.getSystemLookAndFeelClassName());
 	    } 
 	    catch (UnsupportedLookAndFeelException e) {
-	       // handle exception
+	    	System.err.println("This look and feel is Unsupported. \n Details: ");
+	    	e.printStackTrace();
 	    }
 	    catch (ClassNotFoundException e) {
-	       // handle exception
+	    	e.printStackTrace();
 	    }
 	    catch (InstantiationException e) {
-	       // handle exception
+	    	e.printStackTrace();
 	    }
 	    catch (IllegalAccessException e) {
-	       // handle exception
+	    	e.printStackTrace();
 	    }
-
 		new MainFrame();
 	}
 }

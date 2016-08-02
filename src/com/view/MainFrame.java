@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -14,13 +16,13 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 
 import com.controller.NewsReader;
+import com.model.objects.Article;
 import com.model.objects.NewsWebsite;
 
-public class MainFrame{
+public class MainFrame implements PropertyChangeListener {
 	
 	private final JFrame myFrame;
 	private final ContentPanel contentPanel;
@@ -30,7 +32,9 @@ public class MainFrame{
 	private JComboBox<String> sites;
 	private List<NewsWebsite> theSites; 
 	private JScrollPane pane;
-	private JSplitPane split;
+	private Article currentArticle;
+	private String currentArticletext;
+	
 	
 	public MainFrame() {
 		myFrame = new JFrame();
@@ -72,6 +76,7 @@ public class MainFrame{
         borderlaoutpanel.add(headlinesPanel, BorderLayout.NORTH);
         headlinesPanel.setLayout(new GridLayout(0, 1, 0, 1));
         headlinesPanel.setBackground(Color.WHITE);
+        headlinesPanel.addPropertyChangeListener(this);
 	}
 	
 	private JToolBar createToolBar() {
@@ -98,9 +103,31 @@ public class MainFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//read text out
+				if (!currentArticletext.isEmpty()) 
+					new ReaderThread().start();
 			}	
 		});
 		return button;
+	}
+
+	@Override
+	public void propertyChange(final PropertyChangeEvent event) {
+		if (event.getPropertyName().equalsIgnoreCase("article")) {
+			Article newArticle = (Article)event.getNewValue();
+			if (newArticle != currentArticle) {
+				currentArticle = newArticle;
+				currentArticletext = reader.getArticleText(currentArticle);
+				contentPanel.loadArticleText(currentArticletext);
+			}
+				
+		}
+	}
+	
+	public class ReaderThread extends Thread {
+		
+		@Override
+	    public void run() {
+	        reader.read(currentArticletext);
+	    }
 	}
 }
