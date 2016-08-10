@@ -22,6 +22,11 @@ import com.controller.NewsReader;
 import com.model.objects.Article;
 import com.model.objects.NewsWebsite;
 
+/**
+ * The Main Frame of the program.
+ * @author Nwoke Fortune Chiemeziem
+ * @version 1.0
+ */
 public class MainFrame implements PropertyChangeListener {
 	
 	private final JFrame myFrame;
@@ -35,7 +40,9 @@ public class MainFrame implements PropertyChangeListener {
 	private Article currentArticle;
 	private String currentArticletext;
 	
-	
+	/**
+	 * Constructor initializes all fields and sets up look of frame.
+	 */
 	public MainFrame() {
 		myFrame = new JFrame();
 		contentPanel = new ContentPanel();
@@ -57,7 +64,11 @@ public class MainFrame implements PropertyChangeListener {
 		myFrame.setVisible(true);
 		headlinesPanel.displayHeadlines(getSite(sites.getSelectedItem().toString()));
 	}
-	
+	/**
+	 * Helper method that takes a sites name and returns the website.
+	 * @param siteName the Site name we are searching for.
+	 * @return a reference to the website.
+	 */
 	private NewsWebsite getSite(final String siteName) {
 		for (int i = 0; i< theSites.size(); i++) {
 			if(theSites.get(i).getName().equalsIgnoreCase(siteName))
@@ -87,14 +98,15 @@ public class MainFrame implements PropertyChangeListener {
 		//sites.addItem("All");
 		for (final NewsWebsite n : theSites)
 			sites.addItem(n.getName());
-		
-		
 		bar.add(sites);
 		bar.add(createPlayButton());
 		
 		return bar;
 	}
-	
+	/**
+	 * Creates the play button that reads the text on the Content Panel.
+ 	 * @return the Play button.
+	 */
 	private JButton createPlayButton() {
 		final ImageIcon icon = new ImageIcon("./play.png");
 		final JButton button = new JButton(icon);
@@ -109,7 +121,7 @@ public class MainFrame implements PropertyChangeListener {
 		});
 		return button;
 	}
-
+	
 	@Override
 	public void propertyChange(final PropertyChangeEvent event) {
 		if (event.getPropertyName().equalsIgnoreCase("article")) {
@@ -118,13 +130,15 @@ public class MainFrame implements PropertyChangeListener {
 				currentArticle = newArticle;
 				currentArticletext = reader.getArticleText(currentArticle);
 				contentPanel.loadArticleText(currentArticletext);
-			}
-				
+			}	
 		}
 	}
-	
+	/**
+	 * Reader thread that reads the article.
+	 * @author Nwoke Fortune Chiemeziem
+	 * @version 1.0
+	 */
 	public class ReaderThread extends Thread {
-		
 		@Override
 	    public void run() {
 	        reader.read(currentArticletext);

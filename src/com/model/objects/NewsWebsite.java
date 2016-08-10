@@ -52,27 +52,45 @@ public class NewsWebsite {
 	public int getID() {
 		return ID;
 	}
-	
+	/**
+	 * Returns the name of the website.
+	 * @return the name of the website.
+	 */
 	public String getName() {
 		return name;
 	}
-
+	/**
+	 * Sets the name of the website.
+	 * @param name the name of teh website.
+	 */
 	public void setName(final String name) {
 		this.name = name;
 	}
-
+	/**
+	 * Returns the URL of the website.
+	 * @return the URL of the website.
+	 */
 	public URL getUrl() {
 		return url;
 	}
-
+	/**
+	 * Sets the URL of the website.
+	 * @param url the URL of the website.
+	 */
 	public void setUrl(final URL url) {
 		this.url = url;
 	}
-
+	/**
+	 * Returns the Rank of the website.
+	 * @return the Rank of the website.
+	 */
 	public int getRank() {
 		return rank;
 	}
-
+	/**
+	 * Sets the rank of the website.
+	 * @param rank the rank of the website.
+	 */
 	public void setRank(final int rank) {
 		this.rank = rank;
 	}

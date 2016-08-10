@@ -9,13 +9,21 @@ import java.util.List;
 
 import com.model.objects.NewsWebsite;
 import com.model.objects.Subsection;
-
+/**
+ * The main interation point to my database.
+ * @author Nwoke Fortune Chiemeziem
+ * @Version 1.0
+ */
 public class DBManager {
 	private static Connection conn; 
 	
 	public DBManager() {
 	}
-	
+	/**
+	 * Loads up a list of  websites with the required subsections.
+	 * @param websites the websites to be loaded up.
+	 * @return the websites with all its subsections.
+	 */
 	public static List<NewsWebsite> loadUpSubsections(final List<NewsWebsite> websites) {
 		
 		for (int i =0; i< websites.size(); i++) {
@@ -25,6 +33,11 @@ public class DBManager {
 		return websites;
 	}
 	
+	/**
+	 * Takes a website and loads in all its subsections.
+	 * @param website the website
+	 * @return the websites loaded with its subsections.
+	 */
 	private static NewsWebsite loadUpSubsections(final NewsWebsite website) {
 		conn = ConnectionManager.getInstance();
 		PreparedStatement pStatement = null;
@@ -47,6 +60,10 @@ public class DBManager {
 		return website;
 	}
 	
+	/**
+	 * Gets all the websites available in the database.
+	 * @return a list of all the websites.
+	 */
 	public static List<NewsWebsite> getWebsites() {
 		conn = ConnectionManager.getInstance();
 		PreparedStatement selectWebsites = null;

@@ -22,13 +22,18 @@ import de.l3s.boilerpipe.extractors.ArticleExtractor;
 import de.l3s.boilerpipe.sax.BoilerpipeSAXInput;
 import de.l3s.boilerpipe.sax.HTMLDocument;
 import de.l3s.boilerpipe.sax.HTMLFetcher;
-
+/**
+ * The Controller class for the whole application.
+ * @author Nwoke Fortune Chiemeziem
+ * @version 1.0
+ */
 public class NewsReader {
 	private List<NewsWebsite> websites;
 	private boolean sitesPulled = false;
 	private static final String VOICE_NAME = "kevin";
 	private final Voice voice;
-
+	
+	/** Initialized the variables.*/
 	public NewsReader() {
 		websites = getWebsitesFromDB();
 		sitesPulled = true;
@@ -37,9 +42,12 @@ public class NewsReader {
 		
 		voice.allocate();
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public List<NewsWebsite> getWebsites() {
-		while (!sitesPulled) {
+		while (!sitesPulled) { //halt thread is the websites have not been pulled.
 			try {
 				this.wait();
 			} catch (InterruptedException e) {
