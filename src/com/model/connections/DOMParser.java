@@ -92,7 +92,7 @@ public abstract class DOMParser {
 		return description.substring(0, description.indexOf('.')+1);
 	}
 	/**
-	 * Helper merthod that parses the stream and returns teh document.
+	 * Helper method that parses the stream and returns the document.
 	 * @param stream the stream to be parsed
 	 * @return the document.
 	 */
